@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "parser": "@babel/eslint-parser",
+  "plugins": ["prettier", "jasmine"],
+  "extends": ["eslint:recommended"],
+  "rules": {
+    "prettier/prettier": 2,
+    "no-use-before-define": ["error", { "functions": true, "classes": true }],
+    "no-var": "error",
+    "prefer-const": "error"
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "requireConfigFile": false
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "jasmine": true
+  }
+}
