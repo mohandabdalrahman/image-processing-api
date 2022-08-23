@@ -1,23 +1,31 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
-import sharp from "sharp";
 import validateParams from "../../middlewares/validate-params";
 import resizeImage from "../../resize-image";
 const routes = express.Router();
 
+export interface QueryObj {
+  filename: string;
+  width: number;
+  height: number;
+}
+
 routes.get(
   "/images",
   validateParams,
-  (req: express.Request, res: express.Response) => {
-    const { filename, width, height } = req.query;
+  (
+    req: express.Request,
+    res: express.Response
+  ): void | express.Response<Record<any, string>> => {
+    const { filename, width, height } = req.query as unknown as QueryObj;
     const imagePath = path.join(
       __dirname,
       "..",
       "..",
       "assets",
       "full",
-      filename as string
+      filename
     );
     // output path
     const outputPath = path.join(
@@ -26,26 +34,18 @@ routes.get(
       "..",
       "assets",
       "thumb",
-      filename as string
+      `${filename.split(".")[0]}-${width}-${height}.jpg`
     );
     if (!fs.existsSync(imagePath)) {
       return res.status(404).json({
-        error: "Image not found",
+        error: "Image not found"
       });
     }
-    // check if the output file exists
-    if (fs.existsSync(outputPath) && width && height) {
-      sharp.cache(false);
-      const image = sharp(outputPath);
-      image.metadata().then((metadata) => {
-        if (metadata.width === +width && metadata.height === +height) {
-          return res.sendFile(outputPath);
-        } else {
-          resizeImage(imagePath, outputPath, +width, +height, res);
-        }
-      });
-    } else {
+    // check if the image not exist
+    if (!fs.existsSync(outputPath)) {
       resizeImage(imagePath, outputPath, +width!, +height!, res);
+    } else {
+      return res.sendFile(outputPath);
     }
   }
 );

@@ -1,7 +1,7 @@
 {
   "root": true,
-  "parser": "@babel/eslint-parser",
-  "plugins": ["prettier", "jasmine"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["prettier", "jasmine","@typescript-eslint"],
   "extends": ["eslint:recommended"],
   "rules": {
     "prettier/prettier": 2,
@@ -10,7 +10,7 @@
     "prefer-const": "error"
   },
   "parserOptions": {
-    "ecmaVersion": 8,
+    "ecmaVersion": "latest",
     "sourceType": "module",
     "requireConfigFile": false
   },

@@ -17,7 +17,7 @@ const resizeImage = (
     .catch((err: express.Errback) => {
       console.log(err);
       return res.status(500).json({
-        error: "Something went wrong when resizing the image",
+        error: "Something went wrong when resizing the image"
       });
     });
 };

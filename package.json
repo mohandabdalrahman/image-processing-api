@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.ts",
-    "build": "npx tsc",
-    "lint": "npx eslint src/**/*.ts",
+    "build": "npx tsc  && npm run copy:assets",
+    "lint": "npx eslint --fix src/**/*.ts",
     "prettier": "npx prettier --write src/**/*.ts",
     "jasmine": "jasmine",
-    "test": "npm run build && npm run jasmine"
+    "test": "npm run build && npm run jasmine",
+    "copy:assets": "cp -rv './src/assets' './dist/assets'"
   },
   "keywords": [],
   "author": "Mohand abdalrahman ahmed",
@@ -22,12 +23,12 @@
     "supertest": "^6.2.4"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.18.9",
     "@types/express": "^4.17.13",
     "@types/jasmine": "^4.0.3",
     "@types/node": "^18.7.2",
     "@types/sharp": "^0.30.5",
     "@types/supertest": "^2.0.12",
+    "@typescript-eslint/parser": "^5.34.0",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jasmine": "^4.1.3",
