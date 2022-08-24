@@ -1,5 +1,5 @@
 import express from "express";
-import { QueryObj } from '../routes/api';
+import { QueryObj } from "../routes/api";
 
 const validateParams = (
   req: express.Request,
